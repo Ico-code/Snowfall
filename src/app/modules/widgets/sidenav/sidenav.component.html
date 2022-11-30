@@ -1,0 +1,78 @@
+<section class="p-2 bg-primary">
+  <form [formGroup]="fallingObjectControls" class="mt-4">
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="SpeedX" id="SpeedX"
+        >SpeedX:{{ fallingObjectControls.value.SpeedX | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="SpeedX" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="SpeedY" id="SpeedY"
+        >SpeedY:{{ fallingObjectControls.value.SpeedY | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="SpeedY" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="" id="">
+        Amount:{{ fallingObjectControls.value.Amount | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Amount" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="Type" id="Type"
+        >Type:{{ fallingObjectControls.value.Type | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Type" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="Angle" id="Angle"
+        >Angle:{{ fallingObjectControls.value.Angle | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Angle" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="Color" id="Color"
+        >Color:{{ fallingObjectControls.value.Color | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Color" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="Height" id="Height">
+        Height:{{ fallingObjectControls.value.Height | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Height" />
+      </mat-slider>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <label class="text-white" for="Width" id="Width"
+        >Width:{{ fallingObjectControls.value.Width | json }}</label
+      >
+      <mat-slider min="1" max="100" step="1" showTickMarks>
+        <input matSliderThumb class="mw-100" formControlName="Width" />
+      </mat-slider>
+    </div>
+    <div>
+      <button
+        type="submit"
+        (click)="submit()"
+        mat-raised-button
+        class="w-100 text-white bg-dark"
+      >
+        Apply changes
+      </button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,7 @@
+section {
+  min-height: 96vh;
+  overflow: hidden;
+}
+div {
+  min-height: inherit;
+}

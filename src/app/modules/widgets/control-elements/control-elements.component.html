@@ -1,0 +1,12 @@
+<ul>
+  <li *ngFor="let controlItem of controlItems" class="text-white p-2">
+    <button
+      mat-raised-button
+      color="primary"
+      id="{{controlItem}}"
+      (click)="changeSnowfall()"
+    >
+      {{ controlItem }}
+    </button>
+  </li>
+</ul>

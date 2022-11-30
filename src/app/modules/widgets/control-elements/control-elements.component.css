@@ -1,0 +1,6 @@
+#Snowfall-Switch:hover {
+  background-color: #8448eb;
+}
+* {
+  z-index: 100000;
+}

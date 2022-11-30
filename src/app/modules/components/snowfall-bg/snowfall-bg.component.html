@@ -1,0 +1,8 @@
+<section class="container-fluid bg-dark p-0">
+  <div class="position-relative" [ngStyle]="{ transform: direction }">
+    <app-control-elements></app-control-elements>
+    <app-snowflake
+      *ngFor="let snow of snowFallList"
+    ></app-snowflake>
+  </div>
+</section>
