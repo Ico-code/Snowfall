@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SnowflakepathService } from './snowflakepath.service';
+import { settingsInterface } from './../../../assets/data/settignsInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,13 @@ export class SnowflakeService {
   snowfallActivityChange: Subject<boolean> = new Subject<boolean>();
   snowfallActive: boolean = true;
 
-  snowfallAmount: number = 500;
+  fallingObjectColor:string = 'white';
+  fallingObjectBackgroundColor:string = 'black';
+
+  fallingObjectSizeWidth: number = 2;
+  fallingObjectSizeHeight: number = 2;
+
+  snowfallAmount: number = 100;
   snowfallDirection: number = 0;
 
   movementSpeedX = 0.1;
@@ -34,17 +41,53 @@ export class SnowflakeService {
     return this.snowfallAmount;
   }
 
-  setSnowfallDirection() {
-    return this.snowfallDirection;
+  getFallingObjectColor(){
+    return this.fallingObjectColor
   }
-  setSnowfallSpeedX() {
-    return this.movementSpeedX;
+  getFallingObjectBackgroundColor(){
+    return this.fallingObjectBackgroundColor
   }
-  setSnowfallSpeedY() {
-    return this.movementSpeedY;
+  getFallingObjectWidth(){
+    return this.fallingObjectSizeWidth
   }
-  setSnowfallAmount() {
-    return this.snowfallAmount;
+  getFallingObjectHeight(){
+    return this.fallingObjectSizeHeight
+  }
+
+  getFallingObjectSize() {}
+
+  setValues(values: settingsInterface) {
+    this.setSnowfallDirection(values.Angle);
+    this.setSnowfallAmount(values.Amount);
+    this.setSnowfallSpeedX(values.SpeedX);
+    this.setSnowfallSpeedY(values.SpeedY);
+    this.setFallingObjectSize(values.Width, values.Height);
+    this.setFallingObjectBackgroundColor(values.BackgroundColor)
+    this.setFallingObjectColor(values.Color)
+  }
+
+  setFallingObjectColor(color:string){
+    this.fallingObjectColor = color;
+  }
+  setFallingObjectBackgroundColor(background_color:string){
+    this.fallingObjectBackgroundColor = background_color;
+  }
+
+  setFallingObjectSize(Width: number, Height: number) {
+    this.fallingObjectSizeHeight = Height;
+    this.fallingObjectSizeWidth = Width;
+  }
+  setSnowfallDirection(Angle: number) {
+    this.snowfallDirection = Angle;
+  }
+  setSnowfallSpeedX(SpeedX: number) {
+    this.movementSpeedX = SpeedX;
+  }
+  setSnowfallSpeedY(SpeedY: number) {
+    this.movementSpeedY = SpeedY;
+  }
+  setSnowfallAmount(Amount: number) {
+    this.snowfallAmount = Amount;
   }
 
   stopSnowfall() {
@@ -55,6 +98,5 @@ export class SnowflakeService {
     this.snowfallActivityChange.subscribe((val) => {
       this.snowfallActive = val;
     });
-
   }
 }

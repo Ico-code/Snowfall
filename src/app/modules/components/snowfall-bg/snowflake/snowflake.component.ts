@@ -8,11 +8,17 @@ import { SnowflakeService } from '../../../service/snowflake.service';
   styleUrls: ['./snowflake.component.css'],
 })
 export class SnowflakeComponent implements OnInit {
+  //Used for setting the color and dimension of the falling object
+  objectWidth: number = 2;
+  objectHeight: number = 2;
+  objectWidthPX: string = this.objectWidth+'px';
+  objectHeightPX: string = this.objectHeight+'px';
+  objectColor: string = 'white';
   // Should have the same value as that of .transition css class
   snowfallActive: boolean = false;
   snowfallSubscription;
 
-  source = interval(200);
+  source = interval(400);
   fallingObject = this.source.subscribe((val) => {
     this.changeLocation();
   });
@@ -31,12 +37,28 @@ export class SnowflakeComponent implements OnInit {
   snowFallAnimation: boolean = false;
 
   changeLocation() {
+    this.checkForUpdatedValues();
     if (this.snowfallActive == false) {
       return;
     }
     this.outOfAreaCheck();
     this.locationX = this.currentLocationXNum + '%';
     this.locationY = this.currentLocationYNum + '%';
+  }
+
+  checkForUpdatedValues() {
+    if(this.objectHeight != this.snowfallService.getFallingObjectHeight() || this.objectWidth != this.snowfallService.getFallingObjectWidth()) {
+      this.objectWidth = this.snowfallService.getFallingObjectWidth();
+      this.objectHeight = this.snowfallService.getFallingObjectHeight();
+      this.objectWidthPX = this.objectWidth+'px';
+      this.objectHeightPX = this.objectHeight+'px';
+    }
+    if(this.movementSpeedX != this.snowfallService.getSnowfallSpeedX() || this.movementSpeedY != this.snowfallService.getSnowfallSpeedY()){
+      this.movementSpeedX = this.snowfallService.getSnowfallSpeedX();
+      this.movementSpeedY = this.snowfallService.getSnowfallSpeedY();
+
+    }
+    this.objectColor = this.snowfallService.getFallingObjectColor();
   }
 
   outOfAreaCheck() {
@@ -56,12 +78,13 @@ export class SnowflakeComponent implements OnInit {
   }
 
   constructor(private snowfallService: SnowflakeService) {
-    this.snowfallSubscription = this.snowfallService.snowfallActivityChange.subscribe((val)=> {
-      this.snowfallActive = val
-    })
+    this.snowfallSubscription =
+      this.snowfallService.snowfallActivityChange.subscribe((val) => {
+        this.snowfallActive = val;
+      });
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.snowfallActive = this.snowfallService.snowfallActive;
   }
 

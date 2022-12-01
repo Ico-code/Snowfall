@@ -12,6 +12,9 @@ interface snowfallList {
   styleUrls: ['./snowfall-bg.component.css'],
 })
 export class SnowfallBgComponent implements OnInit {
+
+  background_color:string = 'black';
+
   snowfallActive: boolean;
   snowfallSubscription;
 
@@ -33,33 +36,67 @@ export class SnowfallBgComponent implements OnInit {
   direction: string = 'rotateZ(' + this.snowfallDirection + 'deg)';
 
   createSnow(index: number) {
-    if(this.snowfallActive == false){
+    this.checkForNewValues();
+    if (this.snowfallActive == false) {
       return;
     }
-    if (this.currentAmoutOfSnow == this.snowfallAmount) {
-      this.fallingObject.unsubscribe();
+    if(this.checkForSnowLimit()){
+      return;
     }
-    if (this.snowfallAmount * 0.25 < this.currentAmoutOfSnow) {
-      this.source = interval(300);
-      this.fallingObject.unsubscribe();
-      this.fallingObject = this.source.subscribe((val) =>
-        this.createSnow(this.currentAmoutOfSnow)
-      );
-    }
+    this.slowDownSnowCreationRate();
     this.snowFallList.push({
       id: index,
     });
     this.currentAmoutOfSnow++;
   }
 
+  checkBackground(){
+    if(this.background_color != this.snowfallService.getFallingObjectBackgroundColor()){
+      this.background_color = this.snowfallService.getFallingObjectBackgroundColor()
+    }
+  }
+
+  checkForNewValues(){
+    this.checkBackground();
+    if(this.snowfallDirection != this.snowfallService.getSnowfallDirection()){
+      this.snowfallDirection = this.snowfallService.getSnowfallDirection();
+      this.direction = 'rotateZ(' + this.snowfallDirection + 'deg)';
+    }
+    this.snowfallAmount = this.snowfallService.getSnowfallAmount();
+  }
+
+  slowDownSnowCreationRate() {
+    if (
+      this.snowfallAmount * 0.25 < this.currentAmoutOfSnow &&
+      this.snowfallAmount > this.currentAmoutOfSnow
+    ) {
+      this.source = interval(300);
+      this.fallingObject.unsubscribe();
+      this.fallingObject = this.source.subscribe((val) =>
+        this.createSnow(this.currentAmoutOfSnow)
+      );
+    }
+  }
+
+  checkForSnowLimit() {
+    if (this.currentAmoutOfSnow >= this.snowfallAmount) {
+      this.source = interval(1000);
+      this.fallingObject.unsubscribe();
+      this.fallingObject = this.source.subscribe((val) =>
+        this.createSnow(this.currentAmoutOfSnow)
+      );
+      return true;
+    }
+    return false;
+  }
+
   constructor(private snowfallService: SnowflakeService) {
     this.snowfallActive = this.snowfallService.snowfallActive;
-    this.snowfallSubscription = this.snowfallService.snowfallActivityChange.subscribe((val)=> {
-      this.snowfallActive = val
-    })
+    this.snowfallSubscription =
+      this.snowfallService.snowfallActivityChange.subscribe((val) => {
+        this.snowfallActive = val;
+      });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

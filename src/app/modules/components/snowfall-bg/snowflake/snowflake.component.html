@@ -1,5 +1,10 @@
 <div
-  class="object-color"
-  [ngStyle]="{ top: locationY, right: locationX }"
+  [ngStyle]="{
+    top: locationY,
+    right: locationX,
+    'padding-top': objectHeightPX,
+    'padding-left': objectWidthPX,
+    'background-color': objectColor
+  }"
   [ngClass]="snowFallAnimation == true ? 'transition' : ''"
 ></div>

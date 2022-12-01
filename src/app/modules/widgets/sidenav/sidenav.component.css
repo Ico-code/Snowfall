@@ -1,8 +1,17 @@
+#sidenavContainer {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 10000000000;
+}
 section {
+  position: relative;
   max-height: 96vh;
   min-height: 96vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  transition: 0.2s ease;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -23,7 +32,7 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(132, 0, 255);
 }
-::ng-deep .mat-form-field-appearance-fill{
+::ng-deep .mat-form-field-appearance-fill {
   padding-top: 0px !important;
 }
 ::ng-deep .mat-select-value {
@@ -45,8 +54,32 @@ input {
   max-height: 30px;
 }
 button#submitButton:hover {
-  background-color: rgb(76, 0, 255)
+  background-color: rgb(76, 0, 255);
 }
 button#submitButton {
   background-color: rgb(69, 0, 197);
+}
+::ng-deep .mat-slider-horizontal {
+  min-width: 10px !important;
+}
+#closedButton {
+  border-radius: 0% 100% 100% 0%;
+  transition: 0.2s ease;
+  height: 8rem;
+  max-width: 2rem;
+  min-width: 2rem;
+  padding: 0px !important;
+  background-color: deepskyblue;
+  color: white;
+  font-size: 1.5rem;
+}
+#snackbar {
+  box-shadow: rgba(77, 0, 112, 0.5) 0 0.1rem 0.5rem 0.5rem;
+  top: calc(50vh - (/* height */100px / 2));
+  left: calc(50vw - (/* width */140px / 2));
+  z-index: 10000000000000000000000;
+}
+#darkFilter {
+  z-index: 100000000000000000000;
+  background-color: rgba(0, 0, 0, 0.5);
 }

@@ -1,15 +1,16 @@
-<section class="container-fluid bg-dark p-0">
-  <div class="position-relative" [ngStyle]="{ transform: direction }">
-    <div class="d-flex justify-content-start alig-items-start">
-      <app-control-elements></app-control-elements>
-      <div id="counterBox" class="bg-primary p-2 m-2">
-        <p class="text-white">
-          {{currentAmoutOfSnow}} / {{snowfallAmount}}
-        </p>
-      </div>
+<section class="container-fluid p-0" [ngStyle]="{ 'background-color': background_color }">
+  <div
+    class="d-flex justify-content-end alig-items-start flex-wrap position-absolute start-0 end-0"
+  >
+    <app-control-elements></app-control-elements>
+    <div id="counterBox" class="bg-primary p-2 m-2">
+      <p class="text-white">{{ currentAmoutOfSnow }} / {{ snowfallAmount }}</p>
     </div>
-    <app-snowflake
-      *ngFor="let snow of snowFallList"
-    ></app-snowflake>
+  </div>
+  <div
+    class="inheritHeight position-relative"
+    [ngStyle]="{ transform: direction }"
+  >
+    <app-snowflake *ngFor="let snow of snowFallList"></app-snowflake>
   </div>
 </section>

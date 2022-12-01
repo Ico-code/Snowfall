@@ -13,7 +13,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSliderModule} from '@angular/material/slider'
 import {MatSelectModule} from '@angular/material/select'
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { MatInputModule } from '@angular/material/input'
     MatSliderModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
