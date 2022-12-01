@@ -10,28 +10,39 @@ export class SidenavComponent implements OnInit {
 
   fallingObjectControls: FormGroup;
 
-  options:Array<string> = ['SpeedX','SpeedY','Amount','Type','Angle'];
+  controlPresets:Array<string>=['None','Snow','Water','Lava','Dogs','Cats'];
 
-  label(value:number):string {
-    return value.toString()
-  }
+
+
   submit() {
 
   }
-
   constructor(private fb: FormBuilder) {
     this.fallingObjectControls = this.fb.group({
+      Type:this.controlPresets[0],
+      Color:'white',
+      BackgroundColor:'Black',
       SpeedX:0,
       SpeedY:0,
       Amount:0,
-      Type:0,
       Angle:0,
-      Color:String,
       Width:0,
       Height:0
     })
   }
 
-  ngOnInit(): void {}
+  get type(){
+    return this.fallingObjectControls.get('Type')
+  }
+  get color(){
+    return this.fallingObjectControls.get('Color')
+  }
+  get backgroundColor(){
+    return this.fallingObjectControls.get('BackgroundColor')
+  }
+
+  ngOnInit(): void {
+
+  }
 
 }

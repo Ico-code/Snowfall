@@ -1,5 +1,14 @@
-#Snowfall-Switch:hover {
+.Snowfall-Switch-On:hover {
   background-color: #8448eb;
+}
+.Snowfall-Switch-Off:hover {
+  background-color: #c9aaff;
+}
+.Snowfall-Switch-Off {
+  background-color: #a286d1;
+}
+.Snowfall-Switch-On {
+  background-color: #703dc9;
 }
 * {
   z-index: 100000;

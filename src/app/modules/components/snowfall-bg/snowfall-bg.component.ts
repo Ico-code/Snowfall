@@ -12,8 +12,8 @@ interface snowfallList {
   styleUrls: ['./snowfall-bg.component.css'],
 })
 export class SnowfallBgComponent implements OnInit {
-
   snowfallActive: boolean;
+  snowfallSubscription;
 
   snowFallList: Array<snowfallList> = [
     {
@@ -21,20 +21,30 @@ export class SnowfallBgComponent implements OnInit {
     },
   ];
 
-  source = interval(300);
+  source = interval(250);
   fallingObject = this.source.subscribe((val) =>
     this.createSnow(this.currentAmoutOfSnow)
   );
   currentAmoutOfSnow: number = 1;
 
-  snowfallAmount: number = this.service.getSnowfallAmount();
+  snowfallAmount: number = this.snowfallService.getSnowfallAmount();
 
-  snowfallDirection: number = this.service.getSnowfallDirection();
+  snowfallDirection: number = this.snowfallService.getSnowfallDirection();
   direction: string = 'rotateZ(' + this.snowfallDirection + 'deg)';
 
   createSnow(index: number) {
+    if(this.snowfallActive == false){
+      return;
+    }
     if (this.currentAmoutOfSnow == this.snowfallAmount) {
-      this.fallingObject.unsubscribe()
+      this.fallingObject.unsubscribe();
+    }
+    if (this.snowfallAmount * 0.25 < this.currentAmoutOfSnow) {
+      this.source = interval(300);
+      this.fallingObject.unsubscribe();
+      this.fallingObject = this.source.subscribe((val) =>
+        this.createSnow(this.currentAmoutOfSnow)
+      );
     }
     this.snowFallList.push({
       id: index,
@@ -42,9 +52,14 @@ export class SnowfallBgComponent implements OnInit {
     this.currentAmoutOfSnow++;
   }
 
-  constructor(private service: SnowflakeService) {
-    this.snowfallActive = this.service.snowfallActive;
+  constructor(private snowfallService: SnowflakeService) {
+    this.snowfallActive = this.snowfallService.snowfallActive;
+    this.snowfallSubscription = this.snowfallService.snowfallActivityChange.subscribe((val)=> {
+      this.snowfallActive = val
+    })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 }

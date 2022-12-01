@@ -1,5 +1,40 @@
-<section class="p-2 bg-primary">
+<section class="p-1 bg-primary">
   <form [formGroup]="fallingObjectControls" class="mt-4">
+    <div class="mb-2 d-flex flex-column">
+      <mat-form-field appearance="fill">
+        <mat-label class="text-white" for="Type" id="Type">Preset: </mat-label>
+        <mat-select
+          formControlName="Type"
+          value="{{ fallingObjectControls.value.Type.value }}"
+        >
+          <mat-option
+            class="text-white"
+            *ngFor="let Preset of controlPresets"
+            [value]="Preset"
+          >
+            {{ Preset }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <mat-form-field appearance="fill">
+        <mat-label class="text-white" for="Color" id="Color"
+          >Color:
+          <span class="colorPreview p-2 m-1" [ngStyle]="{ 'background-color': color?.value }"></span>
+        </mat-label>
+        <input class="text-white" matInput placeholder="Color" formControlName="Color"/>
+      </mat-form-field>
+    </div>
+    <div class="mb-2 d-flex flex-column">
+      <mat-form-field appearance="fill">
+        <mat-label class="text-white" for="BackgroundColor" id="BackgroundColor"
+          >BackgroundColor:
+          <span class="colorPreview p-2 m-1" [ngStyle]="{ 'background-color': backgroundColor?.value }"></span>
+        </mat-label>
+        <input class="text-white" matInput placeholder="BackgroundColor" formControlName="BackgroundColor"/>
+      </mat-form-field>
+    </div>
     <div class="mb-2 d-flex flex-column">
       <label class="text-white" for="SpeedX" id="SpeedX"
         >SpeedX:{{ fallingObjectControls.value.SpeedX | json }}</label
@@ -17,19 +52,11 @@
       </mat-slider>
     </div>
     <div class="mb-2 d-flex flex-column">
-      <label class="text-white" for="" id="">
+      <label class="text-white" for="Amount" id="Amount">
         Amount:{{ fallingObjectControls.value.Amount | json }}</label
       >
       <mat-slider min="1" max="100" step="1" showTickMarks>
         <input matSliderThumb class="mw-100" formControlName="Amount" />
-      </mat-slider>
-    </div>
-    <div class="mb-2 d-flex flex-column">
-      <label class="text-white" for="Type" id="Type"
-        >Type:{{ fallingObjectControls.value.Type | json }}</label
-      >
-      <mat-slider min="1" max="100" step="1" showTickMarks>
-        <input matSliderThumb class="mw-100" formControlName="Type" />
       </mat-slider>
     </div>
     <div class="mb-2 d-flex flex-column">
@@ -38,14 +65,6 @@
       >
       <mat-slider min="1" max="100" step="1" showTickMarks>
         <input matSliderThumb class="mw-100" formControlName="Angle" />
-      </mat-slider>
-    </div>
-    <div class="mb-2 d-flex flex-column">
-      <label class="text-white" for="Color" id="Color"
-        >Color:{{ fallingObjectControls.value.Color | json }}</label
-      >
-      <mat-slider min="1" max="100" step="1" showTickMarks>
-        <input matSliderThumb class="mw-100" formControlName="Color" />
       </mat-slider>
     </div>
     <div class="mb-2 d-flex flex-column">
@@ -66,10 +85,11 @@
     </div>
     <div>
       <button
+      id="submitButton"
         type="submit"
         (click)="submit()"
         mat-raised-button
-        class="w-100 text-white bg-dark"
+        class="w-100 text-white"
       >
         Apply changes
       </button>

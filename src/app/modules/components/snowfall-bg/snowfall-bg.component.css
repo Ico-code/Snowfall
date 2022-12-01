@@ -5,3 +5,11 @@ section {
 div {
   min-height: inherit;
 }
+div#counterBox {
+  z-index: 10000000;
+  max-height: 35px;
+  min-height: 35px;
+  width: 80px;
+  border-radius: 10px;
+  text-align: center;
+}

@@ -9,10 +9,10 @@ import { SnowflakeService } from '../../../service/snowflake.service';
 })
 export class SnowflakeComponent implements OnInit {
   // Should have the same value as that of .transition css class
-  snowfallActive: boolean = this.snowfallService.snowfallActive;
+  snowfallActive: boolean = false;
   snowfallSubscription;
 
-  source = interval(100);
+  source = interval(200);
   fallingObject = this.source.subscribe((val) => {
     this.changeLocation();
   });
@@ -40,13 +40,14 @@ export class SnowflakeComponent implements OnInit {
   }
 
   outOfAreaCheck() {
-    if (this.currentLocationYNum > 101) {
+    if (this.currentLocationYNum > 105) {
       this.snowFallAnimation = false;
       this.currentLocationYNum = this.snowfallService.getSnowfallBeginY();
       return;
-    } else if (this.currentLocationXNum > 101) {
+    } else if (this.currentLocationXNum > 105) {
       this.snowFallAnimation = false;
       this.currentLocationXNum = this.snowfallService.getSnowfallBeginX();
+      this.currentLocationYNum = this.snowfallService.getSnowfallBeginY();
       return;
     }
     this.snowFallAnimation = true;
@@ -58,6 +59,10 @@ export class SnowflakeComponent implements OnInit {
     this.snowfallSubscription = this.snowfallService.snowfallActivityChange.subscribe((val)=> {
       this.snowfallActive = val
     })
+  }
+
+  ngAfterViewChecked(){
+    this.snowfallActive = this.snowfallService.snowfallActive;
   }
 
   ngOnInit(): void {}

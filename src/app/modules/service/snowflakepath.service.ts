@@ -10,7 +10,7 @@ export class SnowflakepathService {
   }
 
   getStartingPointX(): number {
-    if(this.generateRandomStartingPoint() > 60){
+    if(this.generateRandomStartingPoint() > 65){
       return -Math.abs(this.generateRandomStartingPoint())
     }
     return this.generateRandomStartingPoint();

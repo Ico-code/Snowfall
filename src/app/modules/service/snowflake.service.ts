@@ -9,7 +9,7 @@ export class SnowflakeService {
   snowfallActivityChange: Subject<boolean> = new Subject<boolean>();
   snowfallActive: boolean = true;
 
-  snowfallAmount: number = 200;
+  snowfallAmount: number = 500;
   snowfallDirection: number = 0;
 
   movementSpeedX = 0.1;

@@ -23,3 +23,30 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(132, 0, 255);
 }
+::ng-deep .mat-form-field-appearance-fill{
+  padding-top: 0px !important;
+}
+::ng-deep .mat-select-value {
+  color: white !important;
+}
+::ng-deep span.mat-option-text {
+  color: white !important;
+}
+::ng-deep .mat-select-panel {
+  background-color: deepskyblue !important;
+}
+input {
+  caret-color: white;
+}
+.colorPreview {
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+}
+button#submitButton:hover {
+  background-color: rgb(76, 0, 255)
+}
+button#submitButton {
+  background-color: rgb(69, 0, 197);
+}

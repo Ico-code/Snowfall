@@ -1,6 +1,13 @@
 <section class="container-fluid bg-dark p-0">
   <div class="position-relative" [ngStyle]="{ transform: direction }">
-    <app-control-elements></app-control-elements>
+    <div class="d-flex justify-content-start alig-items-start">
+      <app-control-elements></app-control-elements>
+      <div id="counterBox" class="bg-primary p-2 m-2">
+        <p class="text-white">
+          {{currentAmoutOfSnow}} / {{snowfallAmount}}
+        </p>
+      </div>
+    </div>
     <app-snowflake
       *ngFor="let snow of snowFallList"
     ></app-snowflake>

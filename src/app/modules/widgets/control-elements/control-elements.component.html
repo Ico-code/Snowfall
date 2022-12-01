@@ -1,12 +1,12 @@
 <ul>
-  <li *ngFor="let controlItem of controlItems" class="text-white p-2">
+  <li class="text-white p-2">
     <button
       mat-raised-button
       color="primary"
-      id="{{controlItem}}"
       (click)="changeSnowfall()"
+      [ngClass]="snowFallActive == true ? 'Snowfall-Switch-On':'Snowfall-Switch-Off' "
     >
-      {{ controlItem }}
+      {{ switchText }}
     </button>
   </li>
 </ul>
