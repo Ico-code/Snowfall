@@ -11,6 +11,7 @@ import { SnowflakeService } from '../../service/snowflake.service';
   styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent implements OnInit {
+
   settings: settingsInterface = objectSettings;
 
   faAngleRight = faAngleRight;
@@ -41,8 +42,10 @@ export class SidenavComponent implements OnInit {
     this.fallingObjectControls.get('Height')?.setValue(this.settings.Height);
     this.fallingObjectControls.get('Width')?.setValue(this.settings.Width);
     this.submit()
+
   }
   submit() {
+    this.snowService.messageSource.next('resetSnowfall');
     this.snowService.setValues(this.fallingObjectControls.value);
     console.log(this.fallingObjectControls.value.Color);
   }

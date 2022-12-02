@@ -90,7 +90,18 @@ export class SnowfallBgComponent implements OnInit {
     return false;
   }
 
+  resetSnowfall(){
+    if(this.currentAmoutOfSnow <= this.snowfallAmount){
+      return;
+    }
+    this.currentAmoutOfSnow = 1;
+    this.snowFallList = []
+  }
+
   constructor(private snowfallService: SnowflakeService) {
+    this.snowfallService.messageSource.asObservable().subscribe((value: string) => {
+      this.resetSnowfall();
+    });
     this.snowfallActive = this.snowfallService.snowfallActive;
     this.snowfallSubscription =
       this.snowfallService.snowfallActivityChange.subscribe((val) => {

@@ -7,6 +7,9 @@ import { settingsInterface } from './../../../assets/data/settignsInterface';
   providedIn: 'root',
 })
 export class SnowflakeService {
+
+  messageSource: Subject<string>;
+
   snowfallActivityChange: Subject<boolean> = new Subject<boolean>();
   snowfallActive: boolean = true;
 
@@ -54,8 +57,6 @@ export class SnowflakeService {
     return this.fallingObjectSizeHeight
   }
 
-  getFallingObjectSize() {}
-
   setValues(values: settingsInterface) {
     this.setSnowfallDirection(values.Angle);
     this.setSnowfallAmount(values.Amount);
@@ -95,6 +96,7 @@ export class SnowflakeService {
   }
 
   constructor(private pathservice: SnowflakepathService) {
+    this.messageSource = new Subject<string>();
     this.snowfallActivityChange.subscribe((val) => {
       this.snowfallActive = val;
     });

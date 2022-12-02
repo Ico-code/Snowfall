@@ -14,6 +14,7 @@ export class SnowflakeComponent implements OnInit {
   objectWidthPX: string = this.objectWidth+'px';
   objectHeightPX: string = this.objectHeight+'px';
   objectColor: string = 'white';
+  objectShadow:string = '0px 0px 1px 1px' + this.objectColor;
   // Should have the same value as that of .transition css class
   snowfallActive: boolean = false;
   snowfallSubscription;
